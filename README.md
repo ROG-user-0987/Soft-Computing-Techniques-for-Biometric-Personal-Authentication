@@ -1,10 +1,10 @@
 # Soft Computing for Biometric Authentication
 
-Implementation for my Soft Computing course case study on the review paper:
+Code and results for my Soft Computing course case study, based on this review paper:
 
 > Houssein, E. H., Haridy, S. G. M., Wazery, Y. M., & Ali, A. A. (2026). *Soft Computing Techniques for Biometric Personal Authentication: Fundamentals, Challenges, and Open Issues.* Archives of Computational Methods in Engineering, 33, 14983–15013. https://doi.org/10.1007/s11831-026-10731-3
 
-The paper reviews 153 studies. This project tests two of its main findings on a real face database.
+The paper reviews 153 studies. This project tests two of its main findings on a real face database:
 
 | Part | Claim from the paper | What the notebook does |
 |---|---|---|
@@ -13,42 +13,54 @@ The paper reviews 153 studies. This project tests two of its main findings on a 
 
 ## Results
 
-Averages over 5 random train/test splits (7 training and 3 test images per person).
+All figures are averages over 5 random train/test splits, with 7 training and 3 test images per person.
 
-**Part A: feature selection (rank-1 identification accuracy)**
+### Part A: feature selection
+
+Rank-1 identification accuracy:
 
 | Method | Accuracy | Features used |
 |---|---|---|
 | All eigenface features | 92.8% | 100 |
 | PSO-selected | 93.3% (+0.5) | about 54 |
-| GA-selected | 93.8% (+1.0) | about 55 |
+| GA-selected | **93.8% (+1.0)** | about 55 |
 
-**Part B: verification (Equal Error Rate, lower is better)**
+PSO and the GA kept about half the features with slightly better average accuracy. The gain is smaller than the paper's 3–8 points and varies between splits, because the search partly over-fits a small training set.
+
+![Convergence of PSO and GA](results/convergence.png)
+
+![Feature selection results](results/feature_selection_results.png)
+
+### Part B: score fusion
+
+Equal Error Rate (lower is better):
 
 | System | EER |
 |---|---|
 | Eigenface matcher only | 8.45% |
 | HOG matcher only | 7.21% |
-| Mean score fusion | 5.19% |
+| Mean score fusion | **5.19%** |
 | Fuzzy score fusion | 5.33% |
 
-**Findings.** PSO and the GA kept about half the features with slightly better average accuracy, but the gain is smaller than the paper's 3–8 points and varies between splits, because the search partly over-fits a small training set. Score-level fusion clearly lowered the error rate compared with either matcher alone; fuzzy fusion matched the simple mean on these clean images.
+Score-level fusion clearly lowered the error rate compared with either matcher alone. Fuzzy fusion performed about the same as the simple mean on these clean images.
 
-![Convergence of PSO and GA](results/convergence.png)
-![Feature selection results](results/feature_selection_results.png)
 ![Fuzzy membership functions and rule surface](results/fuzzy_system.png)
+
 ![FAR/FRR trade-off and ROC curves](results/far_frr_roc.png)
+
 ![EER of single and fused matchers](results/fusion_eer.png)
 
 ## How to run
 
-**Google Colab:** upload `Biometric_Soft_Computing_Implementation.ipynb` (File → Upload notebook) and choose Runtime → Run all. No GPU is needed; it takes about 1–3 minutes.
+The notebook needs no GPU and takes about 1–3 minutes to run.
+
+**Google Colab:** upload `Biometric_Soft_Computing_Implementation.ipynb` (File → Upload notebook), then choose Runtime → Run all.
 
 **On your computer:**
 
 ```bash
-git clone https://github.com/<your-username>/biometric-soft-computing.git
-cd biometric-soft-computing
+git clone https://github.com/ROG-user-0987/Soft-Computing-Techniques-for-Biometric-Personal-Authentication.git
+cd Soft-Computing-Techniques-for-Biometric-Personal-Authentication
 pip install -r requirements.txt
 jupyter notebook Biometric_Soft_Computing_Implementation.ipynb
 ```
@@ -58,7 +70,7 @@ The notebook reads the dataset from `data/`. If that folder is missing, it downl
 ## Repository structure
 
 ```
-biometric-soft-computing/
+Soft-Computing-Techniques-for-Biometric-Personal-Authentication/
 ├── Biometric_Soft_Computing_Implementation.ipynb   # code, explanations and saved outputs
 ├── data/
 │   ├── olivetti_faces.npy            # 400 face images, 64x64, values 0–1
