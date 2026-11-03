@@ -84,6 +84,6 @@ Soft-Computing-Techniques-for-Biometric-Personal-Authentication/
 
 Olivetti faces (the ORL / AT&T face database): 400 grey images of 40 people, 10 images each, taken between 1992 and 1994 at AT&T Laboratories Cambridge. The copy in `data/` matches the version distributed with scikit-learn (`sklearn.datasets.fetch_olivetti_faces`). Credit: AT&T Laboratories Cambridge.
 
-## Author
+## Conclusion
 
-Sriram Aditya Sai (1601-24-748-130), Department of CSE (AI&ML), CBIT, Hyderabad. Soft Computing course, 2026-27.
+The results partly support the paper's findings on this dataset. Binary PSO and the GA cut the feature set by about half without losing accuracy, but their gain of 0.5–1.0 points falls short of the 3–8 points the paper reports. Score-level fusion held up more clearly, lowering the EER from 7.21% for the best single matcher to about 5%. The fuzzy system offered no advantage over the simple mean here, although these clean images may give it little uncertainty to handle.
